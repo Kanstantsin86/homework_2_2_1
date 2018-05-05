@@ -1,7 +1,7 @@
 <?php
 
-$test_dir = "./DownloadFiles/test";
-$test_id = $test_dir.$_GET["id"].".json";
+$test_dir = "./DownloadFiles/";
+$test_id = $test_dir.$_GET["id"];
 $json_file = file_get_contents($test_id);
 $json_array = json_decode($json_file, true);
 
@@ -12,7 +12,6 @@ $json_array = json_decode($json_file, true);
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -27,8 +26,8 @@ $json_array = json_decode($json_file, true);
             <?php foreach ($json_array[$i]['answers'] as $values) { ?>
            <?php for ($j = 0; $j < count($json_array[$i]['answers']); $j++){ ?>
             <label>
-                <input type="radio" name="answer[]"><?php echo $values; break;?>
-                <input type="hidden" name="correct_answer[]">
+                <input type="radio" name="answer<?=$i;?>[]"> <?php echo $values; break;?>
+                <input type="hidden" name="correct_answer<?=$i;?>[]">
             </label>
             <?php } ?>
             
@@ -45,13 +44,23 @@ $json_array = json_decode($json_file, true);
 
 <?php
 //print_r($_POST['answer']);
+
+
+
 $ot = 0;
 $not = 0;
-if ($_POST['answer'] == ['correct_answer']){
-    $ot++;
-} else {
-    $not++;
+$ans = $_POST['answer<?=$i;?>'];
+$corans = 'correct_answer<?=$i;?>';
+foreach ($json_array as $elem) {
+    for ($i = 0; $i < count($json_array); $i++) {
+    if ($ans == $corans){
+        $ot++;
+    } else {
+        $not++;
+    }
+} break;
 }
+
 ?> 
     <p>Правильных ответов: <?php echo $ot; ?></p>
     <p>Неправильных ответов:<?php echo $not; ?></p>

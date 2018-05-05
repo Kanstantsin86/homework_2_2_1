@@ -3,13 +3,15 @@ ini_set('upload_max_filesize', '3M');
 if ($_SERVER['REQUEST_METHOD'] == "POST" ) {
 	if ($_FILES['userfile']['error'] == UPLOAD_ERR_OK && $_FILES['userfile']['type'] == 'application/json') {
 		
-		$destination_dir = dirname(__FILE__) . './DownloadFiles/' . $_FILES['userfile']['name']; 
+		$destination_dir = dirname(__FILE__) . './DownloadFiles/' . $_FILES['userfile']['name'];
+
 		if (move_uploaded_file($_FILES['userfile']['tmp_name'], $destination_dir)) { 
 			echo 'Файл загружен';
- 			
+
 		} else {
 			echo 'Файл не загружен!';
 		}
+		
 	} else {
 		switch ($_FILES['userfile']['error']) {
 			case UPLOAD_ERR_FORM_SIZE:

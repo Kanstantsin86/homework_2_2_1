@@ -1,7 +1,7 @@
 <?php
 
 $files = array_slice(scandir('./DownloadFiles/'), 2);
-print_r($files);
+//print_r($files);
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +15,14 @@ print_r($files);
 <nav>
     <ul>
         <?php foreach ($files as $file) { ?>
-        <?php for ($i = 0; $i < count($files); $i++){ ?>
-            <li><a href="test.php?id=<?=($i+1);?>">Тест: <?=$files[$i];?></a></li>
-        <?php } break;?>
+        <!--?php for ($i = 0; $i < count($files); $i++){ ?-->
+            <!--li><a href="test.php?id=<?=($i+1);?>">Тест: <?=$files[$i];?></a></li-->
+            <li><a href="test.php?id=<?=$file;?>">Тест: <?=$file;?></a></li>
+        <!--?php } ?-->
         
         <?php } ?>
-        <li><a href="admin.php">Загрузить тест</a></li>
+        
            
     </ul>
+    <a href="admin.php">Загрузить тест</a>
 </nav>
