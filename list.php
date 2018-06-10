@@ -1,7 +1,7 @@
 <?php
 
 $files = array_slice(scandir('./DownloadFiles/'), 2);
-//print_r($files);
+
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +19,7 @@ $files = array_slice(scandir('./DownloadFiles/'), 2);
             <!--li><a href="test.php?id=<?=($i+1);?>">Тест: <?=$files[$i];?></a></li-->
             <li><a href="test.php?id=<?=$file;?>">Тест: <?=$file;?></a></li>
         <!--?php } ?-->
-        
         <?php } ?>
-        
-           
     </ul>
     <a href="admin.php">Загрузить тест</a>
 </nav>

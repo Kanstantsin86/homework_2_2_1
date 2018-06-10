@@ -7,7 +7,7 @@
         "3": "1",
         "4": "3"
         },
-    "correct_answer": "1"
+    "correct_answer": "4"
 },
 {
     "question": "Сколько будет 2 / 2?",
@@ -29,5 +29,5 @@
         "3": "30",
         "4": "28"
         },
-    "correct_answer": "1"
+    "correct_answer": "31"
 }]

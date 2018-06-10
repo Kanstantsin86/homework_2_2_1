@@ -26,8 +26,8 @@ $json_array = json_decode($json_file, true);
             <?php foreach ($json_array[$i]['answers'] as $values) { ?>
            <?php for ($j = 0; $j < count($json_array[$i]['answers']); $j++){ ?>
             <label>
-                <input type="radio" name="answer<?=$i;?>[]"> <?php echo $values; break;?>
-                <input type="hidden" name="correct_answer<?=$i;?>[]">
+                <input type="radio" name="answer<?=$i;?>" value="<?=$values;?>"> <?php echo $values; break;?>
+                <input type="hidden" name="correct_answer<?=$i;?>">
             </label>
             <?php } ?>
             
@@ -37,30 +37,29 @@ $json_array = json_decode($json_file, true);
     <?php } ?>
 
 
-<button type="submit">Результат</button>
+<button type="submit" name="submit">Результат</button>
 </form>
 </body>
 </html>
 
 <?php
-//print_r($_POST['answer']);
-
-
 
 $ot = 0;
 $not = 0;
-$ans = $_POST['answer<?=$i;?>'];
-$corans = 'correct_answer<?=$i;?>';
+
 foreach ($json_array as $elem) {
-    for ($i = 0; $i < count($json_array); $i++) {
-    if ($ans == $corans){
-        $ot++;
-    } else {
-        $not++;
-    }
-} break;
+    for ($i = 0; $i < count($elem); $i++) {
+        $corans = $json_array[$i]['correct_answer'];
+        $ans = isset($_POST["answer" . $i])?$_POST["answer" . $i]:'';
+            if ($ans == $corans){
+                $ot++;
+            } else {
+                $not++;
+            } 
+    } break;
 }
 
-?> 
-    <p>Правильных ответов: <?php echo $ot; ?></p>
-    <p>Неправильных ответов:<?php echo $not; ?></p>
+if (isset($_POST["submit"])) {?> 
+  <p>Правильных ответов: <?php echo $ot; ?></p>
+  <p>Неправильных ответов:<?php echo $not; ?></p>
+<?php } ?> 
